@@ -1,0 +1,54 @@
+h1 {
+  color: yellow;
+}
+
+.help-block1, .help-block2{
+  text-align: left;
+}
+
+label[for=exampleInputAddress]
+{
+  float: left;
+}
+
+.cssloader {
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid blue;
+  border-right: 16px solid green;
+  border-bottom: 16px solid red;
+  border-left: 16px solid pink;
+  width: 120px;
+  height: 120px;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+}
+
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.overlay{
+  display: none;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  background: rgba(255,255,255,0.8) url("../images/loader.gif") center no-repeat;
+}
+/* Turn off scrollbar when body element has the loading class */
+body.loading{
+  overflow: hidden;   
+}
+/* Make spinner image visible when body element has the loading class */
+body.loading .overlay{
+  display: block;
+}

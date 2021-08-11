@@ -1,0 +1,8 @@
+.idea/
+/scripts/match_stats.json
+/scripts/match_stats.html
+/scripts/testCode.py
+.env
+node_modules/
+/scripts/__pycache__
+.DS_Store
