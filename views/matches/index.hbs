@@ -1,36 +1,45 @@
-<table id="example" class="display" width="100%"></table>
+<table id="allMatches" class="compact hover" width="100%">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>FFS Match ID</th>
+      <th>Home Team</th>
+      <th>Home Team Score</th>
+      <th>Away Team Score</th>
+      <th>Away Team</th>
+      <th>Matchday</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each matches}}
+    <tr>
+      <th>{{[0]}}</th>
+      <th><a href="/matches/{{[1]}}">{{[1]}}</a></th>
+      <th>{{[2]}}</th>
+      <th>{{[3]}}</th>
+      <th>{{[4]}}</th>
+      <th>{{[5]}}</th>
+      <th>{{[6]}}</th>
+    </tr>
+    {{/each}}
+  </tbody>
+  <tfoot>
+    <tr>
+      <th>#</th>
+      <th>FFS Match ID</th>
+      <th>Home Team</th>
+      <th>Home Team Score</th>
+      <th>Away Team Score</th>
+      <th>Away Team</th>
+      <th>Matchday</th>
+    </tr>
+  </tfoot>
+</table>
+
 
 
 <script>
-  window.data = [];
-  let match = [];
-  {{#each matches}}
-    match = [];
-    {{#each this}}
-      match.push('{{this}}');
-    {{/each}}
-    window.data.push(match)
-  {{/each}}
-
   $(document).ready(function () {
-    $('#example').DataTable({
-      data: window.data,
-      columns: [
-      { title: "ID",
-        render: function(data, type, row, meta){
-            if(type === 'display'){
-                data = '<a href="/matches/' + data + '">' + data.slice(-8) + '</a>';
-            }
-            
-            return data;
-         }
-      },
-      { title: "Home Team" },
-      { title: "Home Score" },
-      { title: "Away Team" },
-      { title: "Away Score" },
-      { title: "Date" }
-    ]
-    });
+    $('#allMatches').DataTable({});
   });
 </script>

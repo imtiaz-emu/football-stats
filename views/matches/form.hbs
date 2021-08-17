@@ -1,13 +1,18 @@
-<form action="{{formUrl}}" method="{{method}}" id="match-fetcher-form">
-  <div class="form-group">
-    <label for="exampleInputAddress">Insert FFS Match ID</label>
-    <input type="text" name="match_id" class="form-control" id="exampleInputAddress" placeholder="address">
-  </div>
+<div class="row justify-content-md-center text-center">
+  <div class="col-md-4">
+    <div class="card mb-4 rounded-3 shadow-sm">
+      <div class="card-header py-3">
+        <h4 class="my-0 fw-normal">Statistics Fetcher</h4>
+      </div>
+      <div class="card-body">
+        <form class="row g-3 mt-3 mb-4" action="{{formUrl}}" method="{{method}}" id="match-fetcher-form">
+          <div class="col">
+            <input type="text" class="form-control" id="ffsMatchId" name="match_id" placeholder="Match ID">
+          </div>
 
-  <div class="form-group">
-    <p class="help-block1"></p>
-    <p class="help-block2"></p>
+          <button type="submit" class="w-100 btn btn-lg btn-primary">Fetch Data</button>
+        </form>
+      </div>
+    </div>
   </div>
-
-  <button type="submit" class="btn btn-default">Submit</button>
-</form>
+</div>

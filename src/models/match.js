@@ -93,7 +93,7 @@ matchSchema.methods.toJSON = function () {
 matchSchema.statics.allMatchesAsDataset = async () => {
   try {
     const matches = await Match.find({})
-    return matches.map(m => { return [m._id.toString(), m.home_team, m.home_score, m.away_team, m.away_score, convertFullDateToShort(m.matchday)] })
+    return matches.map(m => { return [m._id.toString().slice(-7), m.ffs_match_id, m.home_team, m.home_score, m.away_score, m.away_team, convertFullDateToShort(m.matchday)] })
   } catch (e) {
     return []
   }

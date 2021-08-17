@@ -39,9 +39,10 @@ class FFS_BOT():
         EC.presence_of_element_located((By.ID, "username"))
       )
 
-      if "Please wait a few minutes" in self.browser.page_source:
-        self.save_page_as_file({}, 'match_stats.json')
+      if "Page Not Found" in self.browser.page_source:
         self.browser.quit()
+        print(json.dumps({'error': "Unable to login to FFS website"}))
+        return
 
       username_input = self.browser.find_element_by_xpath("//input[@name='username']")
       password_input = self.browser.find_element_by_xpath("//input[@name='password']")
@@ -51,46 +52,41 @@ class FFS_BOT():
       password_input.send_keys(Keys.ENTER)
     except Exception as e:
       self.browser.quit()
-      print({'error': 'Unable to scrap data => {e}'.format(e=e)})
+      print(json.dumps({'error': "Unable to scrap data from FFS website"}))
+      return
 
 
   def collect_page_data(self):
     match_stats_url = 'https://members.fantasyfootballscout.co.uk/matches/{m_id}/'.format(m_id=self.match_id)
     # The following is a sample match stats page collected and saved as html locally to extract data without hitting the ffs server
     # match_stats_url = 'file:///Users/imtiaz/Etectra/work/ffpb-stats/scripts/match_stats.html'
-    self.browser.get(match_stats_url)
-
-    start = timer()
-    element = WebDriverWait(self.browser, 20).until(
-      EC.presence_of_element_located((By.ID, "DataTables_Table_8"))
-    )
-    end = timer()
-    # print('WebDriverWait: %f' % (end - start))
-
-    self.player_stats = build_player_stats(self.browser)
-    self.match_data = {}
-
     try:
-      start = timer()
+      self.browser.get(match_stats_url)
+
+      element = WebDriverWait(self.browser, 120).until(
+        EC.presence_of_element_located((By.TAG_NAME, "h1"))
+      )
+      
+      if "Page Not Found" in self.browser.page_source:
+          self.browser.quit()
+          print(json.dumps({'error': "Please provide a valid Match ID"}))
+          return
+
+      self.player_stats = build_player_stats(self.browser)
+      self.match_data = {}
+    
       self.extract_data_from_page()
-      end = timer()
-      # print('Extraction Data: %f' % (end - start))
       self.extract_game_data_from_page()
       self.player_stats = self.format_stats()
       self.match_data['players'] = self.player_stats
 
-      start = timer()
       result = json.dumps(self.match_data)
-      end = timer()
-      # print('Dumping Data: %f' % (end - start))
-      # self.save_page_as_file(self.browser.page_source)
-      self.save_page_as_file(result, 'match_stats.json')
-
+      
       self.browser.quit()
       print(result)
     except Exception as e:
       self.browser.quit()
-      print({'error': 'Unable to scrap data => {e}'.format(e=e)})
+      print(json.dumps({'error': "Unable to scrap data from FFS website"}))
 
 
   def extract_data_from_page(self):

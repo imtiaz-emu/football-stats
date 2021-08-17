@@ -2,8 +2,19 @@ const express = require('express')
 const path = require('path')
 var exphbs = require('express-handlebars')
 var bodyParser = require('body-parser')
+const session = require('express-session');
+const flash = require('connect-flash');
 
 const app = express()
+
+app.use(session({
+  secret: 'secret key',
+  resave: false,
+  saveUninitialized: false
+}));
+
+app.use(flash());
+
 const matchesRouter = require('./routers/match')
 require('./db/mongoose')
 require('dotenv').config({ path: path.join(__dirname, '../.env') })

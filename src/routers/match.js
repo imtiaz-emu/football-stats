@@ -1,33 +1,52 @@
-const express = require('express')
-const router = express.Router()
+const express = require('express');
+const router = express.Router();
 const Match = require('../models/match');
-const scrap_ffs_data = require('../services/match_stats')
+const scrap_ffs_data = require('../services/match_stats');
+const basicAuth = require('express-basic-auth');
 
-router.get('/', async (req, res) => {
-  const matches = await Match.allMatchesAsDataset()
-  // console.log(matches)
-  res.render('matches/index', {
-    title: 'FFPB-Stats',
-    matches: matches
-  })
-})
+const authentication = basicAuth({
+  users: {
+    'admin': 'password'
+  },
+  challenge: true,
+  realm: 'Imb4T3st4pp'
+});
 
-router.get('/matches/new', async (req, res) => {
+router.get('/matches/new', authentication, async (req, res) => {
   res.render('matches/form', {
-    title: 'Match Statistics',
+    notice: req.flash('notice'),
+    title: 'Fetcher: Match Statistics',
     formUrl: '/matches',
     method: 'post'
   })
 })
 
+router.get('/', async (req, res) => {
+  const matches = await Match.allMatchesAsDataset()
+
+  res.render('matches/index', {
+    notice: req.flash('Please show me'),
+    title: 'All Matches: Results',
+    matches: matches
+  })
+})
+
 router.post('/matches', async (req, res) => {
-  const jsonData = scrap_ffs_data(req.body.match_id)
-  // let jsonData = require('../../scripts/match_stats.json');
-  const match = await Match.saveMatchAndPlayerStats(jsonData)
-  
-  if(match.error == undefined){
-    res.redirect(`/matches/${match._id}`)
-  }else{
+  const jsonData = scrap_ffs_data(req.body.match_id);
+  const jsonObject = JSON.parse(jsonData);
+
+  if (jsonObject.error != undefined) {
+    req.flash('notice', jsonObject.error);
+    return res.redirect('/matches/new')
+  }
+
+  const match = await Match.saveMatchAndPlayerStats(jsonObject);
+
+  if (match.error == undefined) {
+    req.flash('notice', 'Successfully fetched FFS match data.');
+    res.redirect(`/matches/${match.ffs_match_id}`)
+  } else {
+    req.flash('notice', match.error);
     res.redirect('/matches/new')
   }
 })

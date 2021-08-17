@@ -8,7 +8,7 @@
   <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
   <meta name="description" content="">
   <meta name="author" content="">
-  <link rel="icon" href="../../assets/images/favicon.png">
+  <link rel="icon" href="../../images/favicon.png">
   <link rel="canonical" href="https://getbootstrap.com/docs/3.3/examples/jumbotron-narrow/">
 
   <title>{{title}}</title>
@@ -17,7 +17,6 @@
   <link href="../../css/bootstrap.min.css" rel="stylesheet">
 
   <!-- Custom styles for this template -->
-  <link href="../../css/jumborton-narrow.css" rel="stylesheet">
   <link href="../../css/jquery.dataTables.min.css" rel="stylesheet">
 
   <script src="../../js/jquery-3.6.0.min.js"></script>
@@ -31,10 +30,16 @@
   <div class="container">
     {{>_header}}
 
-    <div class="overlay"></div>
-    <div class="jumbotron">
-      {{{body}}}
+    {{#if notice}}
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+      {{notice}}
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
+    {{/if}}
+
+    <div class="overlay"></div>
+
+    {{{body}}}
 
     {{>_footer}}
   </div>
