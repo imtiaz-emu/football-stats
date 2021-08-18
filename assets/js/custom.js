@@ -1,5 +1,7 @@
-$("body").removeClass("loading");
+$(document).ready(function () {
+  $("body").removeClass("loading");
 
-$("#match-fetcher-form").submit(function () {
-  $("body").addClass("loading");
-})
+  $("#match-fetcher-form").submit(function () {
+    $("body").addClass("loading");
+  })
+});

@@ -35,7 +35,11 @@ app.engine('.hbs', exphbs({
   extname: '.hbs',
   defaultLayout: 'application',
   layoutsDir: layoutDirPath,
-  partialsDir: partialDirPath
+  partialsDir: partialDirPath,
+  runtimeOptions: {
+    allowProtoPropertiesByDefault: true,
+    allowProtoMethodsByDefault: true,
+  },
 }))
 app.set('view engine', '.hbs');
 

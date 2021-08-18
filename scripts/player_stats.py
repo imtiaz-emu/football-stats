@@ -95,7 +95,7 @@ def goal_threat(page_source, stats):
     if indx == 12:
       stats['goal_threat']['attempts']['total'] = row_data.get_attribute('innerText').strip()
     if indx == 13:
-      stats['goal_threat']['attempts']['inbox_show'] = row_data.get_attribute('innerText').strip()
+      stats['goal_threat']['attempts']['inbox_shot'] = row_data.get_attribute('innerText').strip()
     if indx == 14:
       stats['goal_threat']['attempts']['total_big_chances'] = row_data.get_attribute('innerText').strip()
     if indx == 15:

@@ -39,7 +39,7 @@ const matchSchema = mongoose.Schema({
 matchSchema.virtual('players', {
   ref: 'Player',
   localField: '_id',
-  foreignField: 'player_id'
+  foreignField: 'match_id'
 })
 
 function convertStringToDate(string) {

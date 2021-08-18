@@ -25,7 +25,7 @@ router.get('/', async (req, res) => {
   const matches = await Match.allMatchesAsDataset()
 
   res.render('matches/index', {
-    notice: req.flash('Please show me'),
+    notice: req.flash('notice'),
     title: 'All Matches: Results',
     matches: matches
   })
@@ -53,9 +53,24 @@ router.post('/matches', async (req, res) => {
 
 router.get('/matches/:id', async (req, res) => {
   try {
-    res.status(200).send({})
+    const match = await Match.findOne({ ffs_match_id: req.params.id });
+    await match.populate('players').execPopulate();
+
+    if (!match) {
+      req.flash('notice', 'Match ID not found.');
+      return res.redirect('/')
+    }
+
+    res.render('matches/show', {
+      notice: req.flash('notice'),
+      title: `Statistics: ${match.home_team} v ${match.away_team}`,
+      match: match,
+      players: match.players
+    })
   } catch (e) {
-    res.status(500).send(e)
+    console.log(e);
+    req.flash('notice', 'Something went wrong. Try again later.');
+    return res.redirect('/');
   }
 })
 

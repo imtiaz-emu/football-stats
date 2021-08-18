@@ -1,0 +1,162 @@
+<div class="py-5 text-center">
+  <h3>{{match.home_team}} {{match.home_score}} - {{match.away_score}} {{match.away_team}}</h3>
+  <p class="lead">{{match.matchday}}</p>
+</div>
+
+<ul class="nav nav-pills mb-3" id="matchStats-tab" role="tablist">
+  <li class="nav-item" role="presentation">
+    <button class="nav-link active" id="tabInvolvement" data-bs-toggle="pill" data-bs-target="#tabInvolvement"
+      type="button" role="tab" aria-controls="tabInvolvement" aria-selected="true">tabInvolvement</button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="tabExpected" data-bs-toggle="pill" data-bs-target="#tabExpected" type="button"
+      role="tab" aria-controls="tabExpected" aria-selected="false">tabExpected</button>
+  </li>
+</ul>
+
+{{!-- <ul class="nav nav-tabs" id="matchStatsTab" role="tablist">
+  <li class="nav-item" role="presentation">
+    <button class="nav-link active" id="tabInvolvement" data-bs-toggle="tab" data-bs-target="#tabInvolvement"
+      type="button" role="tab" aria-controls="tabInvolvement" aria-selected="true">Involvement</button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="tabExpected" data-bs-toggle="tab" data-bs-target="#tabExpected" type="button"
+      role="tab" aria-controls="tabExpected" aria-selected="false">Expected</button>
+  </li>
+</ul> --}}
+
+<div class="tab-content" id="matchStats-tabContent">
+  <div class="tab-pane fade show active" id="tabInvolvement" role="tabpanel" aria-labelledby="tabInvolvement">
+    <table class="table table-responsive table-bordered">
+      <thead>
+        <tr role="row">
+          <th colspan="4" class="" rowspan="1"></th>
+          <th colspan="4" class="group" rowspan="1">Touches</th>
+          <th colspan="4" class="group" rowspan="1">Passes Received</th>
+          <th colspan="6" class="group" rowspan="1">Expected/Involvement</th>
+        </tr>
+        <tr role="row">
+          {{!-- General --}}
+          <th rowspan="1" colspan="1" aria-label="Name: activate to sort column descending">Name</th>
+          <th rowspan="1" colspan="1" aria-label="Name: activate to sort column descending">Team</th>
+          <th rowspan="1" colspan="1" aria-label="Name: activate to sort column descending">Cost</th>
+          <th rowspan="1" colspan="1" aria-label="Name: activate to sort column descending">Mins</th>
+          {{!-- Touches --}}
+          <th rowspan="1" colspan="1" aria-label="Name: activate to sort column descending">Tot</th>
+          <th rowspan="1" colspan="1" aria-label="Name: activate to sort column descending">Opp half</th>
+          <th rowspan="1" colspan="1" aria-label="Name: activate to sort column descending">Fin 3rd</th>
+          <th rowspan="1" colspan="1" aria-label="Name: activate to sort column descending">Mins/Tch</th>
+          {{!-- Passes --}}
+          <th rowspan="1" colspan="1" aria-label="Name: activate to sort column descending">Tot</th>
+          <th rowspan="1" colspan="1" aria-label="Name: activate to sort column descending">Opp half</th>
+          <th rowspan="1" colspan="1" aria-label="Name: activate to sort column descending">Fin 3rd</th>
+          <th rowspan="1" colspan="1" aria-label="Name: activate to sort column descending">Mins/Pass</th>
+          {{!-- Expected --}}
+          <th rowspan="1" colspan="1" aria-label="Name: activate to sort column descending">Assists</th>
+          <th rowspan="1" colspan="1" aria-label="Name: activate to sort column descending">xA</th>
+          <th rowspan="1" colspan="1" aria-label="Name: activate to sort column descending">Goals</th>
+          <th rowspan="1" colspan="1" aria-label="Name: activate to sort column descending">xG</th>
+          <th rowspan="1" colspan="1" aria-label="Name: activate to sort column descending">xGI</th>
+          <th rowspan="1" colspan="1" aria-label="Name: activate to sort column descending">xGI &Delta;</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each players}}
+        <tr>
+          {{!-- General --}}
+          <td>{{this.player_name}}</td>
+          <td>{{this.stats.team}}</td>
+          <td>{{this.stats.price}}</td>
+          <td>{{this.stats.min_played}}</td>
+          {{!-- Touches --}}
+          <td>{{this.stats.touches.total}}</td>
+          <td>{{this.stats.touches.opp_half}}</td>
+          <td>{{this.stats.touches.final_3rd}}</td>
+          <td>{{this.stats.touches.min_per_touch}}</td>
+          {{!-- Passes --}}
+          <td>{{this.stats.passes.total}}</td>
+          <td>{{this.stats.passes.opp_half}}</td>
+          <td>{{this.stats.passes.final_3rd}}</td>
+          <td>{{this.stats.passes.mins_per_pass}}</td>
+          {{!-- Expected --}}
+          <td>{{this.stats.expected.assists}}</td>
+          <td>{{this.stats.expected.xA}}</td>
+          <td>{{this.stats.expected.goals}}</td>
+          <td>{{this.stats.expected.xG}}</td>
+          <td>{{this.stats.expected.xGI}}</td>
+          <td>{{this.stats.expected.xGI_delta}}</td>
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+  <div class="tab-pane fade" id="tabExpected" role="tabpanel" aria-labelledby="tabExpected">
+    <table class="table table-responsive table-bordered">
+      <thead>
+        <tr role="row">
+          <th colspan="4" class="" rowspan="1"></th>
+          <th colspan="5" class="group" rowspan="1">Assists Potential</th>
+          <th colspan="7" class="group" rowspan="1">Goal Attempts</th>
+          <th colspan="2" class="group" rowspan="1">Goal Conversion</th>
+        </tr>
+        <tr role="row">
+          {{!-- General --}}
+          <th rowspan="1" colspan="1" aria-label="Name: activate to sort column descending">Name</th>
+          <th rowspan="1" colspan="1" aria-label="Name: activate to sort column descending">Team</th>
+          <th rowspan="1" colspan="1" aria-label="Name: activate to sort column descending">Cost</th>
+          <th rowspan="1" colspan="1" aria-label="Name: activate to sort column descending">Mins</th>
+          {{!-- Assists Potential --}}
+          <th rowspan="1" colspan="1" aria-label="Name: activate to sort column descending">CC</th>
+          <th rowspan="1" colspan="1" aria-label="Name: activate to sort column descending">BCC</th>
+          <th rowspan="1" colspan="1" aria-label="Name: activate to sort column descending">A</th>
+          <th rowspan="1" colspan="1" aria-label="Name: activate to sort column descending">FA</th>
+          <th rowspan="1" colspan="1" aria-label="Name: activate to sort column descending">TA</th>
+          {{!-- Goal Attempts --}}
+          <th rowspan="1" colspan="1" aria-label="Name: activate to sort column descending">Pen Tch</th>
+          <th rowspan="1" colspan="1" aria-label="Name: activate to sort column descending">Tot</th>
+          <th rowspan="1" colspan="1" aria-label="Name: activate to sort column descending">InBox</th>
+          <th rowspan="1" colspan="1" aria-label="Name: activate to sort column descending">TBC</th>
+          <th rowspan="1" colspan="1" aria-label="Name: activate to sort column descending">HBC</th>
+          <th rowspan="1" colspan="1" aria-label="Name: activate to sort column descending">On</th>
+          <th rowspan="1" colspan="1" aria-label="Name: activate to sort column descending">Min/Chc</th>
+          {{!-- Goal Conversion --}}
+          <th rowspan="1" colspan="1" aria-label="Name: activate to sort column descending">Shot Acc</th>
+          <th rowspan="1" colspan="1" aria-label="Name: activate to sort column descending">Goal Conv</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each players}}
+        <tr>
+          {{!-- General --}}
+          <td>{{this.player_name}}</td>
+          <td>{{this.stats.team}}</td>
+          <td>{{this.stats.price}}</td>
+          <td>{{this.stats.min_played}}</td>
+          {{!-- Assists Potential --}}
+          <td>{{this.stats.assist_potential.chances_created}}</td>
+          <td>{{this.stats.assist_potential.big_chances_created}}</td>
+          <td>{{this.stats.assist_potential.assists}}</td>
+          <td>{{this.stats.assist_potential.fantasy_assists}}</td>
+          <td>{{this.stats.assist_potential.total_assists}}</td>
+          {{!-- Goal Attempts --}}
+          <td>{{this.stats.goal_threats.pen_touches}}</td>
+          <td>{{this.stats.goal_threats.attempts.total}}</td>
+          <td>{{this.stats.goal_threats.attempts.inbox_shot}}</td>
+          <td>{{this.stats.goal_threats.attempts.total_big_chances}}</td>
+          <td>{{this.stats.goal_threats.attempts.headed_big_chances}}</td>
+          <td>{{this.stats.goal_threats.attempts.shots_on_target}}</td>
+          <td>{{this.stats.goal_threats.attempts.min_per_chance}}</td>
+          {{!-- Goal Conversion --}}
+          <td>{{this.stats.goal_threats.conversion.shot_accuracy}}</td>
+          <td>{{this.stats.goal_threats.conversion.goal_conversion}}</td>
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+<script>
+
+</script>
