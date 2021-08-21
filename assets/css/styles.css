@@ -2,6 +2,13 @@
 #allMatches_wrapper{
   margin: 50px 0;
 }
+.text-truncate{
+  width: 100px;
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
 /* CSS for All Matches page */
 
 h1 {

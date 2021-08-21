@@ -4,12 +4,13 @@ const Match = require('../models/match');
 const scrap_ffs_data = require('../services/match_stats');
 const basicAuth = require('express-basic-auth');
 
+const realm = (Math.random() + 1).toString(36).substring(2);
 const authentication = basicAuth({
   users: {
-    'admin': 'password'
+    'admin': '22Aug2k21'
   },
   challenge: true,
-  realm: 'Imb4T3st4pp'
+  realm: realm
 });
 
 router.get('/matches/new', authentication, async (req, res) => {
@@ -53,7 +54,7 @@ router.post('/matches', async (req, res) => {
 
 router.get('/matches/:id', async (req, res) => {
   try {
-    const match = await Match.findOne({ ffs_match_id: req.params.id });
+    const match = await Match.findOne({ _id: req.params.id });
     await match.populate('players').execPopulate();
 
     if (!match) {

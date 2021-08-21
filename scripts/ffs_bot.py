@@ -20,7 +20,7 @@ class FFS_BOT():
 
   def __init__(self, match_id, ffs_username, ffs_password):
     # settings for chrome driver, need to change for server
-    webdriver_path = '/Users/imtiaz/Documents/webDriver/chromedriver'
+    webdriver_path = '/home/ubuntu/usr/bin/chromedriver'
     self.browser = webdriver.Chrome(webdriver_path, options=self.chrome_driver_options())
     # add 'implicitly_wait' just to give N seconds time to to load full page with all plugins and assets
     # self.browser.implicitly_wait(3)
@@ -109,6 +109,7 @@ class FFS_BOT():
       self.match_data['home_score'], self.match_data['away_score'] = score.split('-')
       self.match_data['matchday'] = date
       self.match_data['ffs_match_id'] = self.match_id
+      self.match_data['gameweek'] = self.browser.find_element_by_tag_name("label[for='game-id']").get_attribute('innerText').split(' ')[-1].replace(':', '')
     except Exception as e:
       print(e)
 

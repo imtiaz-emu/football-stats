@@ -5,29 +5,18 @@
 
 <ul class="nav nav-pills mb-3" id="matchStats-tab" role="tablist">
   <li class="nav-item" role="presentation">
-    <button class="nav-link active" id="tabInvolvement" data-bs-toggle="pill" data-bs-target="#tabInvolvement"
-      type="button" role="tab" aria-controls="tabInvolvement" aria-selected="true">tabInvolvement</button>
+    <button class="nav-link active" id="tabInvolvement" data-bs-toggle="pill" data-bs-target="#pillInvolvement"
+      type="button" role="tab" aria-controls="pillInvolvement" aria-selected="true">Involvement</button>
   </li>
   <li class="nav-item" role="presentation">
-    <button class="nav-link" id="tabExpected" data-bs-toggle="pill" data-bs-target="#tabExpected" type="button"
-      role="tab" aria-controls="tabExpected" aria-selected="false">tabExpected</button>
+    <button class="nav-link" id="tabExpected" data-bs-toggle="pill" data-bs-target="#pillExpected" type="button"
+      role="tab" aria-controls="pillExpected" aria-selected="false">Expected</button>
   </li>
 </ul>
 
-{{!-- <ul class="nav nav-tabs" id="matchStatsTab" role="tablist">
-  <li class="nav-item" role="presentation">
-    <button class="nav-link active" id="tabInvolvement" data-bs-toggle="tab" data-bs-target="#tabInvolvement"
-      type="button" role="tab" aria-controls="tabInvolvement" aria-selected="true">Involvement</button>
-  </li>
-  <li class="nav-item" role="presentation">
-    <button class="nav-link" id="tabExpected" data-bs-toggle="tab" data-bs-target="#tabExpected" type="button"
-      role="tab" aria-controls="tabExpected" aria-selected="false">Expected</button>
-  </li>
-</ul> --}}
-
 <div class="tab-content" id="matchStats-tabContent">
-  <div class="tab-pane fade show active" id="tabInvolvement" role="tabpanel" aria-labelledby="tabInvolvement">
-    <table class="table table-responsive table-bordered">
+  <div class="tab-pane fade show active" id="pillInvolvement" role="tabpanel" aria-labelledby="tabInvolvement">
+    <table id="involvementTable" class="table table-responsive table-bordered">
       <thead>
         <tr role="row">
           <th colspan="4" class="" rowspan="1"></th>
@@ -90,8 +79,8 @@
       </tbody>
     </table>
   </div>
-  <div class="tab-pane fade" id="tabExpected" role="tabpanel" aria-labelledby="tabExpected">
-    <table class="table table-responsive table-bordered">
+  <div class="tab-pane fade" id="pillExpected" role="tabpanel" aria-labelledby="tabExpected">
+    <table id="expectedTable" class="table table-responsive table-bordered">
       <thead>
         <tr role="row">
           <th colspan="4" class="" rowspan="1"></th>
@@ -139,16 +128,16 @@
           <td>{{this.stats.assist_potential.fantasy_assists}}</td>
           <td>{{this.stats.assist_potential.total_assists}}</td>
           {{!-- Goal Attempts --}}
-          <td>{{this.stats.goal_threats.pen_touches}}</td>
-          <td>{{this.stats.goal_threats.attempts.total}}</td>
-          <td>{{this.stats.goal_threats.attempts.inbox_shot}}</td>
-          <td>{{this.stats.goal_threats.attempts.total_big_chances}}</td>
-          <td>{{this.stats.goal_threats.attempts.headed_big_chances}}</td>
-          <td>{{this.stats.goal_threats.attempts.shots_on_target}}</td>
-          <td>{{this.stats.goal_threats.attempts.min_per_chance}}</td>
+          <td>{{this.stats.goal_threat.pen_touches}}</td>
+          <td>{{this.stats.goal_threat.attempts.total}}</td>
+          <td>{{this.stats.goal_threat.attempts.inbox_shot}}</td>
+          <td>{{this.stats.goal_threat.attempts.total_big_chances}}</td>
+          <td>{{this.stats.goal_threat.attempts.headed_big_chances}}</td>
+          <td>{{this.stats.goal_threat.attempts.shots_on_target}}</td>
+          <td>{{this.stats.goal_threat.attempts.min_per_chance}}</td>
           {{!-- Goal Conversion --}}
-          <td>{{this.stats.goal_threats.conversion.shot_accuracy}}</td>
-          <td>{{this.stats.goal_threats.conversion.goal_conversion}}</td>
+          <td>{{this.stats.goal_threat.conversion.shot_accuracy}}</td>
+          <td>{{this.stats.goal_threat.conversion.goal_conversion}}</td>
         </tr>
         {{/each}}
       </tbody>
@@ -156,7 +145,10 @@
   </div>
 </div>
 
-
 <script>
-
+  $(document).ready(function () {
+    var matchDay = $('.lead').text();
+    matchDay = new Date(matchDay);
+    $('.lead').text(matchDay.toDateString());
+  });
 </script>

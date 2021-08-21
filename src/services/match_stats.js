@@ -1,5 +1,4 @@
 const path = require('path')
-const { spawn } = require('child_process');
 const exec = require("child_process").execSync;
 
 const scriptPath = path.join(__dirname, '../../scripts/ffs_bot.py')

@@ -2,7 +2,7 @@
   <thead>
     <tr>
       <th>#</th>
-      <th>FFS Match ID</th>
+      <th>GameWeek</th>
       <th>Home Team</th>
       <th>Home Team Score</th>
       <th>Away Team Score</th>
@@ -13,8 +13,8 @@
   <tbody>
     {{#each matches}}
     <tr>
-      <th>{{[0]}}</th>
-      <th><a href="/matches/{{[1]}}">{{[1]}}</a></th>
+      <th><a class="text-truncate" href="/matches/{{[0]}}">{{[0]}}</a></th>
+      <th>{{[1]}}</th>
       <th>{{[2]}}</th>
       <th>{{[3]}}</th>
       <th>{{[4]}}</th>
@@ -26,7 +26,7 @@
   <tfoot>
     <tr>
       <th>#</th>
-      <th>FFS Match ID</th>
+      <th>GameWeek</th>
       <th>Home Team</th>
       <th>Home Team Score</th>
       <th>Away Team Score</th>

@@ -31,6 +31,10 @@ const matchSchema = mongoose.Schema({
   matchday: {
     type: Date,
     required: true
+  },
+  gameweek: {
+    type: String,
+    trim: true
   }
 }, {
   timestamps: true
@@ -93,39 +97,11 @@ matchSchema.methods.toJSON = function () {
 matchSchema.statics.allMatchesAsDataset = async () => {
   try {
     const matches = await Match.find({})
-    return matches.map(m => { return [m._id.toString().slice(-7), m.ffs_match_id, m.home_team, m.home_score, m.away_score, m.away_team, convertFullDateToShort(m.matchday)] })
+    return matches.map(m => { return [m._id.toString(), m.gameweek, m.home_team, m.home_score, m.away_score, m.away_team, convertFullDateToShort(m.matchday)] })
   } catch (e) {
     return []
   }
 }
-
-/*
-userSchema.methods.generateAuthToken = async function () {
-  const user = this
-  const token = jwt.sign({ _id: user._id.toString() }, 'This is my secure Key');
-
-  user.tokens = user.tokens.concat({ token })
-  await user.save()
-
-  return token
-}
-
-userSchema.pre('save', async function (next) {
-  const user = this
-
-  if (user.isModified('password')) {
-    user.password = await bcrypt.hash(user.password, 8)
-  }
-
-  next();
-});
-
-userSchema.post('remove', async function (user, next) {
-  await Task.deleteMany({ user_id: user._id })
-
-  next();
-});
-*/
 
 const Match = mongoose.model('Match', matchSchema)
 
