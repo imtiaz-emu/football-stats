@@ -20,7 +20,7 @@ class FFS_BOT():
 
   def __init__(self, match_id, ffs_username, ffs_password):
     # settings for chrome driver, need to change for server
-    webdriver_path = '/home/ubuntu/usr/bin/chromedriver'
+    webdriver_path = '/usr/bin/chromedriver'
     self.browser = webdriver.Chrome(webdriver_path, options=self.chrome_driver_options())
     # add 'implicitly_wait' just to give N seconds time to to load full page with all plugins and assets
     # self.browser.implicitly_wait(3)
