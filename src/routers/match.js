@@ -5,12 +5,17 @@ const scrap_ffs_data = require('../services/match_stats');
 const basicAuth = require('express-basic-auth');
 
 const realm = (Math.random() + 1).toString(36).substring(2);
+const adminPass = process.env.ADMIN_PASSWORD;
+const adminUsers = {};
+adminUsers['admin'] = adminPass;
+
 const authentication = basicAuth({
-  users: {
-    'admin': '22Aug2k21'
-  },
+  adminUsers,
   challenge: true,
-  realm: realm
+  realm: realm,
+  unauthorizedResponse: {
+    message: 'Bad credentials',
+  }
 });
 
 router.get('/matches/new', authentication, async (req, res) => {
@@ -45,7 +50,7 @@ router.post('/matches', async (req, res) => {
 
   if (match.error == undefined) {
     req.flash('notice', 'Successfully fetched FFS match data.');
-    res.redirect(`/matches/${match.ffs_match_id}`)
+    res.redirect(`/matches/${match._id}`)
   } else {
     req.flash('notice', match.error);
     res.redirect('/matches/new')
