@@ -6,11 +6,9 @@ const basicAuth = require('express-basic-auth');
 
 const realm = (Math.random() + 1).toString(36).substring(2);
 const adminPass = process.env.ADMIN_PASSWORD;
-const adminUsers = {};
-adminUsers['admin'] = adminPass;
 
 const authentication = basicAuth({
-  adminUsers,
+  users: { 'admin': adminPass },
   challenge: true,
   realm: realm,
   unauthorizedResponse: {

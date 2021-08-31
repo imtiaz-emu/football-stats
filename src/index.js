@@ -15,9 +15,9 @@ app.use(session({
 
 app.use(flash());
 
-const matchesRouter = require('./routers/match')
 require('./db/mongoose')
 require('dotenv').config({ path: path.join(__dirname, '../.env') })
+const matchesRouter = require('./routers/match')
 
 const port = process.env.PORT || 8000
 app.use(bodyParser.json());       // to support JSON-encoded bodies
