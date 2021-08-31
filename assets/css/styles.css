@@ -11,6 +11,21 @@
 }
 /* CSS for All Matches page */
 
+/* CSS for Match details */
+.tableParentHeader th{
+  border: 1px solid rgb(222, 226, 230);
+}
+#involvementTable_filter, #expectedTable_filter{
+  margin-bottom: 20px;
+}
+.tableChildHeader{
+  font-size: 12px;
+}
+#involvementTable, #expectedTable{
+  width: 100% !important;
+}
+/* CSS for Match details */
+
 h1 {
   color: yellow;
 }

@@ -18,35 +18,50 @@
   <div class="tab-pane fade show active" id="pillInvolvement" role="tabpanel" aria-labelledby="tabInvolvement">
     <table id="involvementTable" class="table table-responsive table-bordered">
       <thead>
-        <tr role="row">
+        <tr role="row" class="tableParentHeader">
           <th colspan="4" class="" rowspan="1"></th>
           <th colspan="4" class="group" rowspan="1">Touches</th>
           <th colspan="4" class="group" rowspan="1">Passes Received</th>
           <th colspan="6" class="group" rowspan="1">Expected/Involvement</th>
         </tr>
-        <tr role="row">
+        <tr role="row" class="tableChildHeader">
           {{!-- General --}}
           <th rowspan="1" colspan="1" aria-label="Name: activate to sort column descending">Name</th>
           <th rowspan="1" colspan="1" aria-label="Name: activate to sort column descending">Team</th>
           <th rowspan="1" colspan="1" aria-label="Name: activate to sort column descending">Cost</th>
-          <th rowspan="1" colspan="1" aria-label="Name: activate to sort column descending">Mins</th>
+          <th data-bs-toggle="tooltip" title="Minutes Played" rowspan="1" colspan="1"
+            aria-label="Name: activate to sort column descending">Mins</th>
           {{!-- Touches --}}
-          <th rowspan="1" colspan="1" aria-label="Name: activate to sort column descending">Tot</th>
-          <th rowspan="1" colspan="1" aria-label="Name: activate to sort column descending">Opp half</th>
-          <th rowspan="1" colspan="1" aria-label="Name: activate to sort column descending">Fin 3rd</th>
-          <th rowspan="1" colspan="1" aria-label="Name: activate to sort column descending">Mins/Tch</th>
+          <th data-bs-toggle="tooltip" title="Total" rowspan="1" colspan="1"
+            aria-label="Name: activate to sort column descending">Tot</th>
+          <th data-bs-toggle="tooltip" title="Opponent's Half" rowspan="1" colspan="1"
+            aria-label="Name: activate to sort column descending">Opp half</th>
+          <th data-bs-toggle="tooltip" title="Final Third" rowspan="1" colspan="1"
+            aria-label="Name: activate to sort column descending">Fin 3rd</th>
+          <th data-bs-toggle="tooltip" title="Minutes per Touches" rowspan="1" colspan="1"
+            aria-label="Name: activate to sort column descending">Mins/Tch</th>
           {{!-- Passes --}}
-          <th rowspan="1" colspan="1" aria-label="Name: activate to sort column descending">Tot</th>
-          <th rowspan="1" colspan="1" aria-label="Name: activate to sort column descending">Opp half</th>
-          <th rowspan="1" colspan="1" aria-label="Name: activate to sort column descending">Fin 3rd</th>
-          <th rowspan="1" colspan="1" aria-label="Name: activate to sort column descending">Mins/Pass</th>
+          <th data-bs-toggle="tooltip" title="Total" rowspan="1" colspan="1"
+            aria-label="Name: activate to sort column descending">Tot</th>
+          <th data-bs-toggle="tooltip" title="Opponent's Half" rowspan="1" colspan="1"
+            aria-label="Name: activate to sort column descending">Opp half</th>
+          <th data-bs-toggle="tooltip" title="Final Third" rowspan="1" colspan="1"
+            aria-label="Name: activate to sort column descending">Fin 3rd</th>
+          <th data-bs-toggle="tooltip" title="Minutes per Passes" rowspan="1" colspan="1"
+            aria-label="Name: activate to sort column descending">Mins/Pass</th>
           {{!-- Expected --}}
-          <th rowspan="1" colspan="1" aria-label="Name: activate to sort column descending">Assists</th>
-          <th rowspan="1" colspan="1" aria-label="Name: activate to sort column descending">xA</th>
-          <th rowspan="1" colspan="1" aria-label="Name: activate to sort column descending">Goals</th>
-          <th rowspan="1" colspan="1" aria-label="Name: activate to sort column descending">xG</th>
-          <th rowspan="1" colspan="1" aria-label="Name: activate to sort column descending">xGI</th>
-          <th rowspan="1" colspan="1" aria-label="Name: activate to sort column descending">xGI &Delta;</th>
+          <th data-bs-toggle="tooltip" title="Assists" rowspan="1" colspan="1"
+            aria-label="Name: activate to sort column descending">Assists</th>
+          <th data-bs-toggle="tooltip" title="Expected Assists" rowspan="1" colspan="1"
+            aria-label="Name: activate to sort column descending">xA</th>
+          <th data-bs-toggle="tooltip" title="Goals" rowspan="1" colspan="1"
+            aria-label="Name: activate to sort column descending">Goals</th>
+          <th data-bs-toggle="tooltip" title="Expected Goals" rowspan="1" colspan="1"
+            aria-label="Name: activate to sort column descending">xG</th>
+          <th data-bs-toggle="tooltip" title="Expected Goals Involvement" rowspan="1" colspan="1"
+            aria-label="Name: activate to sort column descending">xGI</th>
+          <th data-bs-toggle="tooltip" title="xGI Delta (Goals + Assists - xGI)" rowspan="1" colspan="1"
+            aria-label="Name: activate to sort column descending">xGI &Delta;</th>
         </tr>
       </thead>
       <tbody>
@@ -82,35 +97,50 @@
   <div class="tab-pane fade" id="pillExpected" role="tabpanel" aria-labelledby="tabExpected">
     <table id="expectedTable" class="table table-responsive table-bordered">
       <thead>
-        <tr role="row">
+        <tr role="row" class="tableParentHeader">
           <th colspan="4" class="" rowspan="1"></th>
           <th colspan="5" class="group" rowspan="1">Assists Potential</th>
           <th colspan="7" class="group" rowspan="1">Goal Attempts</th>
           <th colspan="2" class="group" rowspan="1">Goal Conversion</th>
         </tr>
-        <tr role="row">
+        <tr role="row" class="tableChildHeader">
           {{!-- General --}}
           <th rowspan="1" colspan="1" aria-label="Name: activate to sort column descending">Name</th>
           <th rowspan="1" colspan="1" aria-label="Name: activate to sort column descending">Team</th>
           <th rowspan="1" colspan="1" aria-label="Name: activate to sort column descending">Cost</th>
-          <th rowspan="1" colspan="1" aria-label="Name: activate to sort column descending">Mins</th>
+          <th data-bs-toggle="tooltip" title="Minutes Played" rowspan="1" colspan="1"
+            aria-label="Name: activate to sort column descending">Mins</th>
           {{!-- Assists Potential --}}
-          <th rowspan="1" colspan="1" aria-label="Name: activate to sort column descending">CC</th>
-          <th rowspan="1" colspan="1" aria-label="Name: activate to sort column descending">BCC</th>
-          <th rowspan="1" colspan="1" aria-label="Name: activate to sort column descending">A</th>
-          <th rowspan="1" colspan="1" aria-label="Name: activate to sort column descending">FA</th>
-          <th rowspan="1" colspan="1" aria-label="Name: activate to sort column descending">TA</th>
+          <th data-bs-toggle="tooltip" title="Chances Created" rowspan="1" colspan="1"
+            aria-label="Name: activate to sort column descending">CC</th>
+          <th data-bs-toggle="tooltip" title="Big Chances Created" rowspan="1" colspan="1"
+            aria-label="Name: activate to sort column descending">BCC</th>
+          <th data-bs-toggle="tooltip" title="Assists" rowspan="1" colspan="1"
+            aria-label="Name: activate to sort column descending">A</th>
+          <th data-bs-toggle="tooltip" title="Fantasy Assists" rowspan="1" colspan="1"
+            aria-label="Name: activate to sort column descending">FA</th>
+          <th data-bs-toggle="tooltip" title="Total Assists" rowspan="1" colspan="1"
+            aria-label="Name: activate to sort column descending">TA</th>
           {{!-- Goal Attempts --}}
-          <th rowspan="1" colspan="1" aria-label="Name: activate to sort column descending">Pen Tch</th>
-          <th rowspan="1" colspan="1" aria-label="Name: activate to sort column descending">Tot</th>
-          <th rowspan="1" colspan="1" aria-label="Name: activate to sort column descending">InBox</th>
-          <th rowspan="1" colspan="1" aria-label="Name: activate to sort column descending">TBC</th>
-          <th rowspan="1" colspan="1" aria-label="Name: activate to sort column descending">HBC</th>
-          <th rowspan="1" colspan="1" aria-label="Name: activate to sort column descending">On</th>
-          <th rowspan="1" colspan="1" aria-label="Name: activate to sort column descending">Min/Chc</th>
+          <th data-bs-toggle="tooltip" title="Penalty Area Touches" rowspan="1" colspan="1"
+            aria-label="Name: activate to sort column descending">Pen Tch</th>
+          <th data-bs-toggle="tooltip" title="Total" rowspan="1" colspan="1"
+            aria-label="Name: activate to sort column descending">Tot</th>
+          <th data-bs-toggle="tooltip" title="Inside the Box" rowspan="1" colspan="1"
+            aria-label="Name: activate to sort column descending">InBox</th>
+          <th data-bs-toggle="tooltip" title="Total Big Chances" rowspan="1" colspan="1"
+            aria-label="Name: activate to sort column descending">TBC</th>
+          <th data-bs-toggle="tooltip" title="Headed Big Chances" rowspan="1" colspan="1"
+            aria-label="Name: activate to sort column descending">HBC</th>
+          <th data-bs-toggle="tooltip" title="Shots on Target" rowspan="1" colspan="1"
+            aria-label="Name: activate to sort column descending">On</th>
+          <th data-bs-toggle="tooltip" title="Minutes per Chances Created" rowspan="1" colspan="1"
+            aria-label="Name: activate to sort column descending">Min/Chc</th>
           {{!-- Goal Conversion --}}
-          <th rowspan="1" colspan="1" aria-label="Name: activate to sort column descending">Shot Acc</th>
-          <th rowspan="1" colspan="1" aria-label="Name: activate to sort column descending">Goal Conv</th>
+          <th data-bs-toggle="tooltip" title="Shot Accuracy" rowspan="1" colspan="1"
+            aria-label="Name: activate to sort column descending">Shot Acc</th>
+          <th data-bs-toggle="tooltip" title="Goal Conversion" rowspan="1" colspan="1"
+            aria-label="Name: activate to sort column descending">Goal Conv</th>
         </tr>
       </thead>
       <tbody>
@@ -150,5 +180,8 @@
     var matchDay = $('.lead').text();
     matchDay = new Date(matchDay);
     $('.lead').text(matchDay.toDateString());
+
+    $('#involvementTable').DataTable();
+    $('#expectedTable').DataTable();
   });
 </script>
