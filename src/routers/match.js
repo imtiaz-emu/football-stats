@@ -3,6 +3,7 @@ const router = express.Router();
 const Match = require('../models/match');
 const scrap_ffs_data = require('../services/match_stats');
 const basicAuth = require('express-basic-auth');
+const matchController = require('../controllers/match_controller');
 
 const realm = (Math.random() + 1).toString(36).substring(2);
 const adminPass = process.env.ADMIN_PASSWORD;
@@ -78,11 +79,20 @@ router.get('/matches/:id', async (req, res) => {
   }
 })
 
-router.delete('/matches/:id', async (req, res) => {
+router.get('/comparison', async (req, res) => {
   try {
-    res.status(200).send({})
+    const players = await matchController.allPlayers();
+    const player_stats = await matchController.comparison(req.query, players);
+    
+    res.render('matches/comparison', {
+      title: 'Player Comparison',
+      players: JSON.stringify(players),
+      player_stats: player_stats
+    })
   } catch (e) {
-    res.status(500).send(e)
+    console.log(e)
+    req.flash('notice', 'Something went wrong. Try again later.');
+    return res.redirect('/');
   }
 })
 

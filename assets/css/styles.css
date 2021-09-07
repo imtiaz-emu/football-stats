@@ -26,6 +26,17 @@
 }
 /* CSS for Match details */
 
+/* CSS for Comparison page */
+#form-player-comparison{
+  margin: 30px 0 50px 0;
+}
+.player-thumbnail{
+  height: 140px;
+  width: 110px;
+  margin: auto;
+}
+/* CSS for Comparison page */
+
 h1 {
   color: yellow;
 }

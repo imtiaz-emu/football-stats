@@ -1,0 +1,124 @@
+<form id="form-player-comparison">
+  <div class="row g-3">
+    <div class="col-auto">
+      <div class="typeahead__container">
+        <div class="typeahead__field">
+          <div class="typeahead__query">
+            <input type="text" class="form-control js-typeahead" placeholder="Player 1" autocomplete="off">
+            <input type="hidden" id="input_p_1" name="p_1" value="">  
+          </div>
+        </div>
+      </div>      
+    </div>
+    <div class="col-auto">
+      <div class="typeahead__container">
+        <div class="typeahead__field">
+          <div class="typeahead__query">
+            <input type="text" class="form-control js-typeahead" placeholder="Player 2" autocomplete="off">
+            <input type="hidden" id="input_p_2" name="p_2" value="">
+          </div>
+        </div>
+      </div>      
+    </div>
+    <div class="col-auto">
+      <div class="typeahead__container">
+        <div class="typeahead__field">
+          <div class="typeahead__query">
+            <input type="text" class="form-control js-typeahead" placeholder="Player 3" autocomplete="off">
+            <input type="hidden" id="input_p_3" name="p_3" value="">
+          </div>
+        </div>
+      </div>      
+    </div>
+    <div class="col-auto">
+      <div class="typeahead__button">
+        <button type="submit" class="btn btn-warning">
+          <i class="typeahead__search-icon"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</form>
+
+{{#if player_stats.[0]}}
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 mb-5">
+    {{#each player_stats}}
+      <div class="col">
+        <div class="card shadow-sm">
+          <img src="{{this.photo}}" class="bd-placeholder-img player-thumbnail" />
+
+          <div class="card-body">
+            <dl class="row">
+              <dt class="col-sm-7">Minutes Played</dt>
+              <dd class="col-sm-5">{{this.min_played}}</dd>
+
+              <dt class="col-sm-7">Chances Created</dt>
+              <dd class="col-sm-5">{{this.chances_created}}</dd>
+
+              <dt class="col-sm-7">Big Chances Created</dt>
+              <dd class="col-sm-5">{{this.big_chances_created}}</dd>
+
+              <dt class="col-sm-7">Attempts</dt>
+              <dd class="col-sm-5">{{this.attempts}}</dd>
+              
+              <dt class="col-sm-7">Assists</dt>
+              <dd class="col-sm-5">{{this.assists}}</dd>
+
+              <dt class="col-sm-7">Goals</dt>
+              <dd class="col-sm-5">{{this.goals}}</dd>
+
+              <dt class="col-sm-7">xA</dt>
+              <dd class="col-sm-5">{{this.xA}}</dd>
+
+              <dt class="col-sm-7">xG</dt>
+              <dd class="col-sm-5">{{this.xG}}</dd>
+
+              <dt class="col-sm-7">Saves</dt>
+              <dd class="col-sm-5">{{this.saves}}</dd>
+
+              <dt class="col-sm-7">Clean Sheets</dt>
+              <dd class="col-sm-5">{{this.clean_sheets}}</dd>
+
+              <dt class="col-sm-7">Form</dt>
+              <dd class="col-sm-5">{{this.form}}</dd>
+
+              <dt class="col-sm-7">Threat</dt>
+              <dd class="col-sm-5">{{this.threat}}</dd>
+              
+              <dt class="col-sm-7">Influence</dt>
+              <dd class="col-sm-5">{{this.influence}}</dd>
+            </dl>
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="btn-group">
+                <strong class="d-inline-block mb-2 text-primary">{{this._id}} ({{this.team}})</strong>
+              </div>
+              <small class="text-muted">
+                <span class="badge bg-success">{{this.price}}</span>
+              </small>
+            </div>
+          </div>
+        </div>
+      </div>
+    {{/each}}
+  </div>
+{{/if}}
+
+
+<script>
+  $(document).ready(function () {
+    var players = "{{ players }}";
+
+    $.typeahead({
+      input: '.js-typeahead',
+      order: "desc",
+      source: {
+        data: JSON.parse(players.replace(/&quot;/g, '"'))
+      },
+      callback: {
+        onClickAfter: function (node, query, event) {
+          node.parent().find("input:hidden:first").val(event.name);
+        }
+      }
+    });
+  })
+</script>
