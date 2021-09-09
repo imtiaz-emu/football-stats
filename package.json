@@ -24,6 +24,8 @@
     "express-basic-auth": "^1.2.0",
     "express-handlebars": "^5.3.3",
     "express-session": "^1.17.2",
+    "got": "^11.8.2",
+    "jquery-typeahead": "^2.11.0",
     "lodash": "^4.17.21",
     "mongoose": "^5.13.0"
   },
