@@ -106,6 +106,11 @@ const fetchPlayerAnalytics = async (player_name, team, element) => {
     }
   ])
 
+  // In case, the player is not debuted in PL, then data will be empty
+  if(analytics.length == 0){
+    analytics[0] = defaultAnalytics(player_name, team);
+  }
+
   analytics[0]['clean_sheets'] = element.cs;
   analytics[0]['saves'] = element.saves;
   analytics[0]['influence'] = element.influence;
@@ -138,6 +143,15 @@ const sanitizePlayerName = (name) => {
               .replace(/é/g, "e")
   
   return name;
+}
+
+const defaultAnalytics = (playerName, team) => {
+  return {
+    _id: playerName, min_played: 0, assists: 0,
+    chances_created: 0, big_chances_created: 0,
+    attempts: 0, goals: 0, xG: 0.00, xA: 0.00, 
+    team: team
+  }
 }
 
 module.exports = {
