@@ -63,6 +63,10 @@ const allPlayers = async () => {
 const formattedPlayers = async (elements, teams) => {
   let players = [];
   elements.forEach(async (element) => {
+    if (ignoringFaultyName(element.web_name)){
+      return;
+    }
+
     let teamName = teams.find(team => team.id == element.team).short_name;
     let sanitizedName = sanitizePlayerName(element.web_name);
     let displayName = `${sanitizedName} (${teamName})`;
@@ -132,21 +136,26 @@ const sanitizePlayerName = (name) => {
               .replace(/ł/g, "l")
               .replace(/[ÜÚ]/g, "U")
               .replace(/[üú]/g, "u")
-              .replace(/Ç/g, "C")
-              .replace(/ç/g, "c")
+              .replace(/[ÇĆ]/g, "C")
+              .replace(/[çć]/g, "c")
               .replace(/Ğ/g, "G")
               .replace(/ğ/g, "g")
               .replace(/Ş/g, "S")
               .replace(/ş/g, "s")
               .replace(/ß/g, "b")
-              .replace(/[îí]/g, "i")
-              .replace(/[ÎÍ]/g, "I")
+              .replace(/[îíï]/g, "i")
+              .replace(/[ÎÍÏ]/g, "I")
               .replace(/é/g, "e")
               .replace(/É/g, "E")
               .replace(/Ñ/g, "N")
               .replace(/ñ/g, "n")
   
   return name;
+}
+
+const ignoringFaultyName = (name) => {
+  const ignoringChars = ['[', ']', '~', '{', '}', '#', '@', '!', '^', '*'];
+  return ignoringChars.some(char => name.includes(char));
 }
 
 const defaultAnalytics = (playerName, team) => {
