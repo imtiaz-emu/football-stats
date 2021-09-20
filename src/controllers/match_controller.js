@@ -125,11 +125,12 @@ const fetchPlayerAnalytics = async (player_name, team, element) => {
 
 const sanitizePlayerName = (name) => {
   name = name.replace(/[äá]/g, "a")
-              .replace(/[öø]/g, "o")
-              .replace(/Ä/g, "A")
-              .replace(/[ÖØ]/g, "O")
+              .replace(/[öøó]/g, "o")
+              .replace(/[ÄÁ]/g, "A")
+              .replace(/[ÖØÓ]/g, "O")
               .replace(/Ł/g, "L")
-              .replace(/Ü/g, "U")
+              .replace(/ł/g, "l")
+              .replace(/[ÜÚ]/g, "U")
               .replace(/[üú]/g, "u")
               .replace(/Ç/g, "C")
               .replace(/ç/g, "c")
@@ -139,8 +140,11 @@ const sanitizePlayerName = (name) => {
               .replace(/ş/g, "s")
               .replace(/ß/g, "b")
               .replace(/[îí]/g, "i")
+              .replace(/[ÎÍ]/g, "I")
               .replace(/é/g, "e")
-              .replace(/é/g, "e")
+              .replace(/É/g, "E")
+              .replace(/Ñ/g, "N")
+              .replace(/ñ/g, "n")
   
   return name;
 }
